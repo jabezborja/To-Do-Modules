@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do Task - Modules</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap.min.css' %}">
+</head>
+<body>
+	<div id="container" style="background: white">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="/">My Subject Tasks</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/">Home</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/tasks_done">Tasks Done</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+		          {{ message }}
+		          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		        </div>
+	        {% endfor %}
+	    {% endif %}
+			{% block content %}{% endblock %}
+		</div>
+
+		<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/vue.js' %}"></script>
+		{% block script %}{% endblock %}
+</body>
+</html>

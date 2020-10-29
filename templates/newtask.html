@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="row justify-content-center mt-4">
+		<div class="card col-8">
+			<div>
+				<div class="card-head mt-2">
+					<h3>Create New Subject Task</h3>
+				</div>
+				<hr class="mb-4">
+				<form action="/newtask/" method="POST">
+			        {% csrf_token %}
+			        <div class="form-group">
+	                	<input type='text' placeholder='Title' id='title' name='title' class='form-control' required />
+	                </div>
+	                <div>
+			        	<textarea id="summary" name="summary" class="form-control mb-3" rows=2 placeholder="Summary"></textarea>
+			        </div>
+			        <hr class="mb-4">
+			        <div class="form-group">
+			        	<textarea id="desc" name="desc" class="form-control" rows=8 placeholder="Task description" required></textarea>
+			        </div>
+			        <div style="display: flex;" class="mb-3">
+			        	<div>
+			        		<label for="subject">Subject </label>
+				        	<input name="subject" id="subject" placeholder="Subject" required>
+				        </div>
+				        <div class="ml-4">
+				        	<label>Week Number </label>
+				        	<input type="integer" name="week_num" id="week_num" placeholder="1" required>
+				        </div>
+
+				        </div>
+            		<button class="btn btn-success btn-lg btn-block mb-3" type="submit">Create Task</button>
+			    </form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
