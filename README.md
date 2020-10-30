@@ -5,7 +5,7 @@ This web app is created for educational and personal purpose only. I created thi
 # Installation
 You can install this in your own laptop or personal computer for free. I make this repository as Public because I want to share my code that I type here.
 
-Make sure that you already had a Pytyhon install and setup a virtual environment.
+Make sure that you already had a Python install and setup a virtual environment.
 
 ```
 py -m venv env
