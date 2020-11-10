@@ -4,21 +4,21 @@
 <div>
 	<div class="row justify-content-center mt-4">
 		<div class="card col-8">
-			<div class="card-head">
-				<h4 class="mt-2">{{task.title}}</h4>
+			<div class="card-head d-flex">
+				<h4 class="mt-3">{{task.title}}</h4>
 			</div>
 			<hr class="mb-1">
 			<div class="card-body">
 				<label for="desc">Task Description</label>
-				<textarea onkeyup="onChangeDesc()" id="desc" class="form-control" rows=8>{{task.desc}}</textarea>
-				<div class="mt-3">
+				<div class="card p-4">
+					<p>{{task.desc | safe}}</p>
+				</div>
+				<div class="mt-5">
 					<small>Week: {{task.week_num}}</small>
 					<small style="float: right;">Subject: {{task.subject}}</small>					
 				</div>
 
  			</div>
-	 		<div id="edit">
-			</div>
 		</div>
 	</div>
 	<div class="row justify-content-center mt-2 mb-5">
@@ -31,7 +31,7 @@
 				{% for note in notes %}
 					<div class="card mt-1 m-1">
 						<a href="#" class="mb-2" style="color: black;">
-							<div class="m-2">
+							<div class="m-2" style="color: black;">
 								<div style="float: left;">
 									{{note.note}}
 								</div>
@@ -44,10 +44,11 @@
 					{% endfor %}			
 			</div>
 			{% endif %}
-			<form method="POST" action="{{task.id}}">
+			<form method="POST" action="/task/{{task.id}}/add_note">
 				{% csrf_token %}
 				{{form}}
 				<div id="btnNote">
+
 					
 				</div>
 			</form>
@@ -59,20 +60,20 @@
 {% block script %}
 <script type="text/javascript"> 
 	var textRecent = document.getElementById("desc").value;
-	var noteRecent = document.getElementById("id_note").value;
+	var noteRecent = document.getElementById("note").value;
 	function onChangeDesc(){
 		var textNow = document.getElementById("desc").value;
 
 		if (textRecent == textNow){
 			document.getElementById('btnEdit').remove()
 		}else{
-			document.getElementById('edit').innerHTML = '<button id="btnEdit" class="btn btn-success form-control mb-2">Edit</button>';
+			document.getElementById('edit').innerHTML = '<button id="btnEdit" type="submit" class="btn btn-success form-control mt-3">Edit</button>';
 		}
 
 	}
 
 	function onChangeNote(){
-		var noteNow = document.getElementById("id_note").value;
+		var noteNow = document.getElementById("note").value;
 
 		if (noteRecent == noteNow){
 			document.getElementById('_btn_').remove();

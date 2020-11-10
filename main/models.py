@@ -16,6 +16,8 @@ SUBJECTS = (
 def x_ago_helper(diff):
 	if diff.days > 0:
 		return f'{diff.days} days ago'
+	if diff.seconds == 0 or diff.seconds == 1:
+		return 'Just Now'
 	if diff.seconds < 60:
 		return f'{diff.seconds} seconds ago'
 	if diff.seconds < 3600:
@@ -26,7 +28,7 @@ def x_ago_helper(diff):
 class Task(models.Model):
 	title = models.CharField(max_length=200)
 	desc = RichTextField(blank=True, null=True)
-	summary = models.TextField(default="A summary")
+	summary = RichTextField(blank=True, null=True)
 	archived = models.BooleanField(default=False)
 	subject = models.CharField(choices=SUBJECTS, max_length=50, default='TLE')
 	week_num = models.IntegerField()

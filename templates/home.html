@@ -3,9 +3,13 @@
 
 {% block content %}
 	<div class="p-3">
-		<button data-toggle="modal" data-target="#newTaskModal" class="btn btn-outline-success">New Task</button>
+		<div>
+			<a href="/createtask">
+				<button class="btn btn-outline-success">New Task</button>
+			</a>
 
-		<button style="float: right;" data-toggle="modal" data-target="#sortByModal" class="btn btn-success">Sort By</button>
+			<p class="card p-1 mr-1" style="float: right;">Task to be done: {{ task_count }}</p>
+		</div>
 
 		{% for tasks in task %}
 			<div class="card mt-3">
@@ -26,81 +30,6 @@
 		{% endfor %}
 	</div>
 
-	<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Create New Subject Task</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form actiion="/" method="POST">
-			        {% csrf_token %}
-			        <div class="form-group">
-	                	<input type='text' placeholder='Title' id='title' name='title' class='form-control' required />
-	                </div>
-	                <div>
-			        	<textarea id="summary" name="summary" class="form-control mb-3" rows=2 placeholder="Summary"></textarea>
-			        </div>
-			        <hr class="mb-4">
-			        <div class="form-group">
-			        	<textarea id="desc" name="desc" class="form-control" rows=8 placeholder="Task description" required></textarea>
-			        </div>
-			        <div style="display: flex;" class="mb-3">
-			        <div>
-			        	<label for="subject">Subject </label>
-				       	<input name="subject" id="subject" placeholder="Subject" required>
-				    </div>
-				    <div class="ml-4">
-				    	<label>Week Number </label>
-				      	<input type="integer" name="week_num" id="week_num" placeholder="1" required>
-				    </div>
-					</div>
-			      </div>
-			      <div class="modal-footer">
-		            <button class="btn btn-success btn-lg btn-block mb-3" type="submit">Create Task</button>
-			      </div>
-		 	 </form>
-		    </div>
-		  </div>
-		</div>
-	</div>
-
-
-	  <div class="modal fade" id="sortByModal" tabindex="-1" role="dialog" aria-labelledby="sortByModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="taskViewModalLabel">Sort By</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <form actiion="/" method="POST">
-				        {% csrf_token %}
-				        <div class="custom-control custom-radio">
-		                	<input id="Week" name="Week" value="week" type="radio" class="custom-control-input" required>
-		                	<label class="custom-control-label" for="Created">Week</label>
-		                </div>
-		                <div class="custom-control custom-radio">
-		                	<input id="Created" name="Created" value="created" type="radio" class="custom-control-input" required>
-		                	<label class="custom-control-label" for="Created">Created</label>
-		                </div>
-				        <div style="display: flex;" class="mb-3">
-						</div>
-				      </div>
-				      <div class="modal-footer">
-			            <button class="btn btn-outline-success btn-lg btn-block mb-3" type="submit">Sort</button>
-				      </div>
-			 	 </form>
-			    </div>
-			  </div>
-			</div>
-		</div>
-
 	  <div class="modal fade" id="taskView" tabindex="-1" role="dialog" aria-labelledby="taskViewModel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -116,4 +45,16 @@
 		  </div>
 	  </div>
 </div>
+
+{% block script %}
+		<script type="text/javascript">
+			let myTitle = new Vue({
+		        el: "",
+		        delimiters: ['[[', ']]'],
+		        data: {
+		          myTitle: '{{ task }}',
+		        },
+		    });
+		</script>
+{% endblock %}
 {% endblock %}
