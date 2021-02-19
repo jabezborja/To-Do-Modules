@@ -24,3 +24,5 @@ class DescForm(forms.ModelForm):
 	class Meta:
 		model = Task
 		fields = ('desc',)
+		
+#Cool comments!
